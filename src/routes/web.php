@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
+Route::get('/smth', \App\Http\Controllers\SomeController::class);
 Route::post('/', \App\Http\Controllers\MessageController::class);
 
 
