@@ -23,6 +23,21 @@ RUN echo "php_admin_value[memory_limit] = 4G" >> /usr/local/etc/php-fpm.d/www.co
 
 RUN docker-php-ext-install pdo pdo_mysql
 
+
+# Install xdebug
+RUN apk update \
+    && apk add --no-cache autoconf g++ make linux-headers  \
+    && pecl install xdebug \
+    && docker-php-ext-enable xdebug
+
+# Uncomment to configure xdebug for step debugging
+
+#RUN echo "xdebug.mode=debug" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
+#    echo "xdebug.start_with_request=yes" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
+#    echo "xdebug.client_host=host.docker.internal" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
+#    echo "xdebug.client_port=9003" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
+
 # Install dependencies for GD and install GD with support for jpeg, png webp and freetype
 # Info about installing GD in PHP https://www.php.net/manual/en/image.installation.php
 RUN apk add --no-cache \

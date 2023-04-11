@@ -13,7 +13,6 @@ class MessageController extends Controller
     {
 
         $messageModel = new Message;
-
         $messageModel->name = $request->input('name');
         $messageModel->email = $request->input('email');
         $messageModel->message = $request->input('message');
